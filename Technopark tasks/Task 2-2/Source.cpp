@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -24,21 +24,21 @@ public:
 	Heap(int heapSize);
 	~Heap() {}
 
-	Node getMax() const;				//просмотр макс значения
-	Node extractMax();					//извлечение максимума
-	void add(Node value);				//добавление элемента в кучу
-	bool isEmpty() const;						//проверка кучи на пустоту
-	void blockStep(int indx);			//проверка кучи на элементы с устаревшими индексами
+	Node getMax() const;				//РїСЂРѕСЃРјРѕС‚СЂ РјР°РєСЃ Р·РЅР°С‡РµРЅРёСЏ
+	Node extractMax();					//РёР·РІР»РµС‡РµРЅРёРµ РјР°РєСЃРёРјСѓРјР°
+	void add(Node value);				//РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РєСѓС‡Сѓ
+	bool isEmpty() const;						//РїСЂРѕРІРµСЂРєР° РєСѓС‡Рё РЅР° РїСѓСЃС‚РѕС‚Сѓ
+	void blockStep(int indx);			//РїСЂРѕРІРµСЂРєР° РєСѓС‡Рё РЅР° СЌР»РµРјРµРЅС‚С‹ СЃ СѓСЃС‚Р°СЂРµРІС€РёРјРё РёРЅРґРµРєСЃР°РјРё
 
 private:
-	vector<Node> heap;					//куча
-	int heapSize;						//размер кучи
-	int blockSize;							//размер буффера
+	vector<Node> heap;					//РєСѓС‡Р°
+	int heapSize;						//СЂР°Р·РјРµСЂ РєСѓС‡Рё
+	int blockSize;							//СЂР°Р·РјРµСЂ Р±СѓС„С„РµСЂР°
 
-	int parent(int i);				//получения индекса родителя в массиве
-	int	left(int i);				//получения индекса левого ребенка в массиве
-	int	right(int i);				//получения индекса правого ребенка в массиве
-	void heapify(int num = 1);		//функция для восстановления основного свойства кучи
+	int parent(int i);				//РїРѕР»СѓС‡РµРЅРёСЏ РёРЅРґРµРєСЃР° СЂРѕРґРёС‚РµР»СЏ РІ РјР°СЃСЃРёРІРµ
+	int	left(int i);				//РїРѕР»СѓС‡РµРЅРёСЏ РёРЅРґРµРєСЃР° Р»РµРІРѕРіРѕ СЂРµР±РµРЅРєР° РІ РјР°СЃСЃРёРІРµ
+	int	right(int i);				//РїРѕР»СѓС‡РµРЅРёСЏ РёРЅРґРµРєСЃР° РїСЂР°РІРѕРіРѕ СЂРµР±РµРЅРєР° РІ РјР°СЃСЃРёРІРµ
+	void heapify(int num = 1);		//С„СѓРЅРєС†РёСЏ РґР»СЏ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёСЏ РѕСЃРЅРѕРІРЅРѕРіРѕ СЃРІРѕР№СЃС‚РІР° РєСѓС‡Рё
 
 
 };
@@ -148,17 +148,17 @@ int main(void) {
 	vector<int> vector;
 	Node maxValue;
 
-	cin >> size;									//считываем длину массива
+	cin >> size;									//СЃС‡РёС‚С‹РІР°РµРј РґР»РёРЅСѓ РјР°СЃСЃРёРІР°
 	if (size <= 0)
 		return 0;
 
 	for (size_t i = 0; i < size; ++i)
 	{
-		cin >> value;								//считываем массив
+		cin >> value;								//СЃС‡РёС‚С‹РІР°РµРј РјР°СЃСЃРёРІ
 		vector.push_back(value);
 	}
 
-	cin >> block;									//считываем размер "окна"
+	cin >> block;									//СЃС‡РёС‚С‹РІР°РµРј СЂР°Р·РјРµСЂ "РѕРєРЅР°"
 	if (block <= 0)
 		return 0;
 
@@ -166,15 +166,15 @@ int main(void) {
 
 
 	for (size_t i = 0; i < block; ++i)
-		heap.add(Node(vector[i], i));				//добавляем первые k элементов в кучу
+		heap.add(Node(vector[i], i));				//РґРѕР±Р°РІР»СЏРµРј РїРµСЂРІС‹Рµ k СЌР»РµРјРµРЅС‚РѕРІ РІ РєСѓС‡Сѓ
 
 	maxValue = heap.getMax();
 	cout << maxValue.value << ' ';
 	for (size_t i = block; i < size; ++i)
 	{
 
-		heap.add(Node(vector[i], i));				//добавляем новый элемент в кучу
-		heap.blockStep(i - block + 1);				//проверка и удаление элементов с неактуальным индексом(за пределами "окна") 
+		heap.add(Node(vector[i], i));				//РґРѕР±Р°РІР»СЏРµРј РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ РІ РєСѓС‡Сѓ
+		heap.blockStep(i - block + 1);				//РїСЂРѕРІРµСЂРєР° Рё СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ СЃ РЅРµР°РєС‚СѓР°Р»СЊРЅС‹Рј РёРЅРґРµРєСЃРѕРј(Р·Р° РїСЂРµРґРµР»Р°РјРё "РѕРєРЅР°") 
 		maxValue = heap.getMax();
 
 		cout << maxValue.value << ' ';
